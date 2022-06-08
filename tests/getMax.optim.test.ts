@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { getMaxRice } from "../src/getMax.optim";
 
-describe("no optim", () => {
+describe("optim", () => {
   it("case 1", () => {
     const board = [[1]];
     const maxRice = getMaxRice(board);
@@ -26,7 +26,7 @@ describe("no optim", () => {
   });
 });
 
-describe("no optim - complexity", () => {
+describe("optim - complexity", () => {
   it("case 1", () => {
     const board = [[1]];
     let counter = 0;
