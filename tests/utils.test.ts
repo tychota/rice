@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { canGoDown, canGoRight, goDown, goRight } from "../src/utils";
+import { canGoDown, canGoRight, getRemainingBoardIfWentDown, getRemainingBoardIfWentRight } from "../src/utils";
 
 describe("utils - can", () => {
   it("canGoDown - OK", () => {
@@ -42,7 +42,7 @@ describe("utils - go", () => {
       [4, 5, 6],
       [7, 8, 9],
     ];
-    const newBoard = goDown(board);
+    const newBoard = getRemainingBoardIfWentDown(board);
     expect(newBoard).toEqual([
       [4, 5, 6],
       [7, 8, 9],
@@ -55,7 +55,7 @@ describe("utils - go", () => {
       [4, 5, 6],
       [7, 8, 9],
     ];
-    const newBoard = goRight(board);
+    const newBoard = getRemainingBoardIfWentRight(board);
     expect(newBoard).toEqual([
       [2, 3],
       [5, 6],

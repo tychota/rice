@@ -1,6 +1,6 @@
 import { Memoize } from "./memoize";
 import { Board } from "./type";
-import { canGoDown, canGoRight, goDown, goRight } from "./utils";
+import { canGoDown, canGoRight, getRemainingBoardIfWentDown, getRemainingBoardIfWentRight } from "./utils";
 
 const noop = () => {};
 
@@ -15,8 +15,18 @@ export function getMaxRice(board: Board, onCallHook: () => void = noop): number 
     }
 
     const topLeftValue = board[0][0];
-    const maxIfRight = canGoRight(board) ? getMaxRiceInner(goRight(board), onCallHook) : 0;
-    const maxIfDown = canGoDown(board) ? getMaxRiceInner(goDown(board), onCallHook) : 0;
+
+    let maxIfRight: number = 0;
+    if (canGoRight(board)) {
+      const remainingBoard = getRemainingBoardIfWentRight(board);
+      maxIfRight = getMaxRiceInner(remainingBoard, onCallHook);
+    }
+
+    let maxIfDown: number = 0;
+    if (canGoDown(board)) {
+      const remainingBoard = getRemainingBoardIfWentDown(board);
+      maxIfDown = getMaxRiceInner(remainingBoard, onCallHook);
+    }
 
     const value = topLeftValue + Math.max(maxIfRight, maxIfDown);
 
